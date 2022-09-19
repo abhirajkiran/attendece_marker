@@ -19,6 +19,7 @@ class Home extends StatelessWidget {
  final _staffcontroller=TextEditingController();
   @override
   Widget build(BuildContext context) {
+  getAllSublist();
     return Scaffold(
      backgroundColor: Color.fromARGB(255, 27, 26, 26),
      drawer: NavDrawer(),
@@ -104,12 +105,13 @@ class Home extends StatelessWidget {
     final _attGoal =_attGoalcontroller.text.trim();
     final _staffName=_staffcontroller.text.trim();
 
+
     if(_subName.isEmpty ||_attGoal.isEmpty){
       return;
     }
     print('$_subName $_attGoal');
 
-   final _sub= formModel(_subName, _attGoal, _staffName);
+   final _sub=formModel(subName:  _subName,attGoal:  _attGoal, staffName: _staffName);
     addSubject(_sub);
   }
 

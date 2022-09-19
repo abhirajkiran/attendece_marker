@@ -1,10 +1,20 @@
 
+import 'package:attendence_marker2/db/db_functions/db_form_functions.dart';
+import 'package:attendence_marker2/db/db_models/form_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 
 import 'Home.dart';
 
-void main() {
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+
+ if(!Hive.isAdapterRegistered(formModelAdapter().typeId)){
+  Hive.registerAdapter(formModelAdapter());
+ }
+
   runApp(const MyApp());
 }
 
@@ -13,6 +23,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+    
    return MaterialApp(
     theme: ThemeData(
       primaryColor: Colors.red

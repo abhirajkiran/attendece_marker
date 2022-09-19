@@ -30,11 +30,12 @@ class SubList extends StatelessWidget {
                       textColor: Colors.white,
                       title: Text(data.subName),
                       subtitle: Text(data.attGoal),
-                      leading: CircleAvatar(),
-                      trailing: ElevatedButton(
-                        //style: ButtonStyle(backgroundColor: MaterialStateProperty.resolveAs(value, states)),
-                        onPressed: () {},
-                         child: Icon(Icons.arrow_forward,color: Colors.green,)));
+                      leading: CircleAvatar(backgroundColor: Colors.transparent,
+                        child: Icon(Icons.menu_book_sharp,color: Colors.green,),
+                      ),
+                   
+                         trailing: IconButton(onPressed: (){}, icon:Icon(Icons.arrow_right_sharp,color: Colors.green,)),
+                         );
                 });
           },
         ),
