@@ -32,13 +32,18 @@ class Home extends StatelessWidget {
       ),
     
       body: Column(
+        
         children: [
           DatePicker(),
+          
           SubList()
-       
+         
         
         ],
+
       ),
+
+      
     
     
       floatingActionButton: FloatingActionButton(

@@ -12,6 +12,7 @@ class SubList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   // getAllSublist();
     return Expanded(
       child: Container(
         child: ValueListenableBuilder(
@@ -27,15 +28,25 @@ class SubList extends StatelessWidget {
                 itemBuilder: (context, index) {
                   final data = form_list[index];
                   return ListTile(
-                      textColor: Colors.white,
-                      title: Text(data.subName),
-                      subtitle: Text(data.attGoal),
-                      leading: CircleAvatar(backgroundColor: Colors.transparent,
-                        child: Icon(Icons.menu_book_sharp,color: Colors.green,),
+                    textColor: Colors.white,
+                    title: Text(data.subName),
+                    subtitle: Text(data.attGoal),
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      child: Icon(
+                        Icons.menu_book_sharp,
+                        color: Colors.green,
                       ),
-                   
-                         trailing: IconButton(onPressed: (){}, icon:Icon(Icons.arrow_right_sharp,color: Colors.green,)),
-                         );
+                    ),
+                    trailing: IconButton(
+                        onPressed: () {
+                          goToSubPage(context);
+                        },
+                        icon: Icon(
+                          Icons.arrow_right_sharp,
+                          color: Colors.green,
+                        )),
+                  );
                 });
           },
         ),

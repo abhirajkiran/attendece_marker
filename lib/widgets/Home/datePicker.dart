@@ -9,7 +9,7 @@ class DatePicker extends StatefulWidget {
    DatePicker({Key? key}) : super(key: key);
 
    
-
+ 
   @override
   State<DatePicker> createState() => _DatePickerState();
 }
@@ -20,6 +20,7 @@ class _DatePickerState extends State<DatePicker> {
   
 
   Future<void> _selectDate(BuildContext context) async {
+   
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
@@ -69,5 +70,6 @@ class _DatePickerState extends State<DatePicker> {
         ],
       ),
     );
+    
   }
 }
