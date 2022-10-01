@@ -20,7 +20,6 @@ class formModel{
 
   formModel({required this.subName,required this.attGoal,required this.staffName,this.id});
 
-  //formModel({ required this.subName,required this.attGoal,required this.staffName,this.id});
-
+  
 }
 

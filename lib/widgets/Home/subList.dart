@@ -40,7 +40,7 @@ class SubList extends StatelessWidget {
                     ),
                     trailing: IconButton(
                         onPressed: () {
-                          goToSubPage(context);
+                          goToSubPage(context,index);
                         },
                         icon: Icon(
                           Icons.arrow_right_sharp,
