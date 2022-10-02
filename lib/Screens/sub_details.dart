@@ -8,13 +8,19 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class SubDetails extends StatelessWidget {
-  const SubDetails({Key? key}) : super(key: key);
+
+   final int ?id;
+   final String subName;
+   final String attGoal;
+   final String staffName;
+
+  const SubDetails({Key? key,  this.id, required this.subName, required this.attGoal, required this.staffName}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text('SUBJECT NAME')),
+        appBar: AppBar(title: Text(subName)),
         body: Center(
           child: Column(
             children: [
@@ -45,7 +51,7 @@ class SubDetails extends StatelessWidget {
                                   needleStartWidth: 1,
                                   needleEndWidth: 5,
                                   enableAnimation: true,
-                                  value: 75,
+                                  value:double.parse(attGoal),
                                 )
                               ],
                               ranges: <GaugeRange>[
@@ -68,7 +74,7 @@ class SubDetails extends StatelessWidget {
                               annotations: <GaugeAnnotation>[
                                 GaugeAnnotation(
                                   widget: Text(
-                                    '75%',
+                                    attGoal+"%",
                                     style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),

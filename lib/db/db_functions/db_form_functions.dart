@@ -30,7 +30,7 @@ Future<void> getAllSublist() async {
   formList.value.clear();
   formList.value.addAll(subListDB.values);
   formList.notifyListeners();
-}
+  }
 
 Future<void> goToSubPage(context,index) async {
   
@@ -39,7 +39,7 @@ Future<void> goToSubPage(context,index) async {
   print(db?.subName);
 
   Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-    return SubDetails();
+    return SubDetails(subName: db!.subName,attGoal:db.attGoal,staffName: db.staffName,);
   }));
   //Navigator.push(, MaterialPageRoute(builder: (Context) => SubDetails()));
 }
