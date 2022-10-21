@@ -21,13 +21,16 @@ class formModelAdapter extends TypeAdapter<formModel> {
       attGoal: fields[2] as String,
       staffName: fields[3] as String,
       id: fields[0] as int?,
+      Attendence: fields[4] as int,
+      Absence: fields[5] as int,
+      percentage: fields[6] as double,
     );
   }
 
   @override
   void write(BinaryWriter writer, formModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -35,7 +38,13 @@ class formModelAdapter extends TypeAdapter<formModel> {
       ..writeByte(2)
       ..write(obj.attGoal)
       ..writeByte(3)
-      ..write(obj.staffName);
+      ..write(obj.staffName)
+      ..writeByte(4)
+      ..write(obj.Attendence)
+      ..writeByte(5)
+      ..write(obj.Absence)
+      ..writeByte(6)
+      ..write(obj.percentage);
   }
 
   @override

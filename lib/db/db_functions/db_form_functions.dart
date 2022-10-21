@@ -37,9 +37,44 @@ Future<void> goToSubPage(context,index) async {
   final subListDB = await Hive.openBox<formModel>('subList_db');
   final db=subListDB.get(index);
   print(db?.subName);
+  //print(db?.Attendence);
 
   Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-    return SubDetails(subName: db!.subName,attGoal:db.attGoal,staffName: db.staffName,);
+    return SubDetails(subName: db!.subName,attGoal:db.attGoal,staffName: db.staffName,Attendence: db.Attendence,id: index,);
   }));
   //Navigator.push(, MaterialPageRoute(builder: (Context) => SubDetails()));
 }
+
+Future addingAttendence(id)async{
+  final subListDB = await Hive.openBox<formModel>('subList_db');
+  final db=subListDB.get(id);
+  
+  int att=db!.Attendence++;
+  subListDB.put(id,formModel(subName: db.subName, attGoal: db.attGoal, staffName: db.subName, Attendence:db.Attendence++,Absence: db.Absence,percentage: db.percentage));
+  print(db.Attendence);
+  
+  
+  
+
+}
+ 
+Future addingAbsence(id)async{
+  final subListDB = await Hive.openBox<formModel>('subList_db');
+  final db=subListDB.get(id);
+  
+  int abb=db!.Absence++;
+  subListDB.put(id,formModel(subName: db.subName, attGoal: db.attGoal, staffName: db.subName, Attendence:db.Attendence,Absence:db.Absence++,percentage: db.percentage));
+  print(db.Absence);
+  
+  
+  
+
+}
+
+Future calculateAttPercentage(id)async{
+   final sublistDB=await Hive.openBox<formModel>('subList_db');
+   final db=sublistDB.get(id);      
+   double percentage1=(db!.Attendence/(db.Absence+db.Attendence))*100;
+   sublistDB.put(id, formModel(subName: db.subName, attGoal: db.attGoal, staffName: db.staffName, Attendence: db.Attendence, Absence: db.Absence, percentage:percentage1 ));
+   print(percentage1);
+  }

@@ -7,17 +7,27 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
+import '../db/db_functions/db_form_functions.dart';
+
 class SubDetails extends StatelessWidget {
+  final int? id;
+  final String subName;
+  final String attGoal;
+  final String staffName;
+  final int Attendence;
 
-   final int ?id;
-   final String subName;
-   final String attGoal;
-   final String staffName;
-
-  const SubDetails({Key? key,  this.id, required this.subName, required this.attGoal, required this.staffName}) : super(key: key);
+  const SubDetails(
+      {Key? key,
+      this.id,
+      required this.subName,
+      required this.attGoal,
+      required this.staffName,
+      required this.Attendence})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String attendencestring = Attendence.toString();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(title: Text(subName)),
@@ -51,7 +61,7 @@ class SubDetails extends StatelessWidget {
                                   needleStartWidth: 1,
                                   needleEndWidth: 5,
                                   enableAnimation: true,
-                                  value:double.parse(attGoal),
+                                  value: double.parse(attGoal),
                                 )
                               ],
                               ranges: <GaugeRange>[
@@ -74,7 +84,7 @@ class SubDetails extends StatelessWidget {
                               annotations: <GaugeAnnotation>[
                                 GaugeAnnotation(
                                   widget: Text(
-                                    attGoal+"%",
+                                    attGoal + "%",
                                     style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold),
@@ -109,7 +119,7 @@ class SubDetails extends StatelessWidget {
                                   needleStartWidth: 1,
                                   needleEndWidth: 5,
                                   enableAnimation: true,
-                                  value: 50,
+                                  value: double.parse(attendencestring),
                                 )
                               ],
                               ranges: <GaugeRange>[
@@ -154,6 +164,8 @@ class SubDetails extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
                         onPressed: () {
+                          addingAttendence(id);
+                          calculateAttPercentage(id);
                           markAttendence(context);
                         },
                         child: Text('Mark a Hour Attendence')),
@@ -167,6 +179,8 @@ class SubDetails extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
                         onPressed: () {
+                          addingAbsence(id);
+                          calculateAttPercentage(id);
                           markAbsence(context);
                         },
                         child: Text('Mark a Hour absence')),
@@ -179,28 +193,28 @@ class SubDetails extends StatelessWidget {
       ),
     );
   }
-}
 
-Future<void> markAttendence(context) {
-  return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-            title: Text('Attendence marked successfully'),
-            actions: [
-              TextButton(
-                  onPressed: () => Navigator.pop(context), child: Text('OK'))
-            ],
-          ));
-}
+  Future<void> markAttendence(context) {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text('Attendence marked successfully'),
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.pop(context), child: Text('OK'))
+              ],
+            ));
+  }
 
-Future<void> markAbsence(context) {
-  return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-            title: Text('Absence marked successfully'),
-            actions: [
-              TextButton(
-                  onPressed: () => Navigator.pop(context), child: Text('OK'))
-            ],
-          ));
+  Future<void> markAbsence(context) {
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text('Absence marked successfully'),
+              actions: [
+                TextButton(
+                    onPressed: () => Navigator.pop(context), child: Text('OK'))
+              ],
+            ));
+  }
 }

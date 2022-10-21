@@ -15,11 +15,18 @@ class formModel{
   final String attGoal;
   @HiveField(3)
   final String staffName;
+  @HiveField(4)
+   int Attendence;
+  @HiveField(5)
+   int Absence;
+  @HiveField(6)
+   double percentage;
 
   
 
-  formModel({required this.subName,required this.attGoal,required this.staffName,this.id});
+formModel({required this.subName,required this.attGoal,required this.staffName,this.id,required this.Attendence,required this.Absence,required this.percentage});
 
   
 }
+
 
