@@ -115,6 +115,9 @@ class Home extends StatelessWidget {
       return;
     }
     print('$_subName $_attGoal');
+    
+
+
 
    final _sub=formModel(subName:  _subName,attGoal:  _attGoal, staffName: _staffName,Attendence:0,Absence: 0,percentage: 0);
     addSubject(_sub);

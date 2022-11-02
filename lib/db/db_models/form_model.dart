@@ -21,7 +21,7 @@ class formModel{
    int Absence;
   @HiveField(6)
    double percentage;
-
+  
   
 
 formModel({required this.subName,required this.attGoal,required this.staffName,this.id,required this.Attendence,required this.Absence,required this.percentage});

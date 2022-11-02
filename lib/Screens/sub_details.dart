@@ -1,6 +1,7 @@
 //import 'dart:html';
 //import 'dart:js';
 
+import 'package:attendence_marker2/widgets/Home/datePicker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -15,6 +16,7 @@ class SubDetails extends StatelessWidget {
   final String attGoal;
   final String staffName;
   final int Attendence;
+  final double percentage;
 
   const SubDetails(
       {Key? key,
@@ -22,7 +24,8 @@ class SubDetails extends StatelessWidget {
       required this.subName,
       required this.attGoal,
       required this.staffName,
-      required this.Attendence})
+      required this.Attendence,
+      required this.percentage})
       : super(key: key);
 
   @override
@@ -98,62 +101,69 @@ class SubDetails extends StatelessWidget {
                         )),
                   ),
                   Expanded(
-                    child: Container(
-                        height: 200,
-                        width: 250,
-                        child: SfRadialGauge(
-                          title: GaugeTitle(text: 'Your Attendence'),
-                          enableLoadingAnimation: true,
-                          axes: <RadialAxis>[
-                            RadialAxis(
-                              minimum: 0,
-                              maximum: 100,
-                              pointers: <GaugePointer>[
-                                NeedlePointer(
-                                  needleLength: 0.75,
-                                  needleColor: Colors.blue,
-                                  knobStyle: KnobStyle(
-                                      knobRadius: 5,
-                                      sizeUnit: GaugeSizeUnit.logicalPixel,
-                                      color: Colors.blue),
-                                  needleStartWidth: 1,
-                                  needleEndWidth: 5,
-                                  enableAnimation: true,
-                                  value: double.parse(attendencestring),
-                                )
-                              ],
-                              ranges: <GaugeRange>[
-                                GaugeRange(
-                                  startValue: 0,
-                                  endValue: 55,
-                                  color: Colors.red,
-                                ),
-                                GaugeRange(
-                                  startValue: 55,
-                                  endValue: 75,
-                                  color: Colors.orange,
-                                ),
-                                GaugeRange(
-                                  startValue: 75,
-                                  endValue: 100,
-                                  color: Colors.green,
-                                )
-                              ],
-                              annotations: <GaugeAnnotation>[
-                                GaugeAnnotation(
-                                  widget: Text(
-                                    '60%',
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
+                    child: ValueListenableBuilder(
+                      valueListenable: attpercen,
+                      builder: (BuildContext context, double attpercen, Widget? child){
+                        return Container(
+                          height: 200,
+                          width: 250,
+                          child: SfRadialGauge(
+                            title: GaugeTitle(text: 'Your Attendence'),
+                            enableLoadingAnimation:true,
+                            axes: <RadialAxis>[
+                              RadialAxis(
+                                minimum: 0,
+                                maximum: 100,
+                                pointers: <GaugePointer>[
+                                  NeedlePointer(
+                                    needleLength: 0.75,
+                                    needleColor: Colors.blue,
+                                    knobStyle: KnobStyle(
+                                        knobRadius: 5,
+                                        sizeUnit: GaugeSizeUnit.logicalPixel,
+                                        color: Colors.blue),
+                                    needleStartWidth: 1,
+                                    needleEndWidth: 5,
+                                    enableAnimation: true,
+                                    value:attpercen,
+                                  )
+                                ],
+                                ranges: <GaugeRange>[
+                                  GaugeRange(
+                                    startValue: 0,
+                                    endValue: 55,
+                                    color: Colors.red,
                                   ),
-                                  positionFactor: 0.5,
-                                  angle: 90,
-                                )
-                              ],
-                            )
-                          ],
-                        )),
+                                  GaugeRange(
+                                    startValue: 55,
+                                    endValue: 75,
+                                    color: Colors.orange,
+                                  ),
+                                  GaugeRange(
+                                    startValue: 75,
+                                    endValue: 100,
+                                    color: Colors.green,
+                                  )
+                                ],
+                                annotations: <GaugeAnnotation>[
+                                  GaugeAnnotation(
+                                    widget: Text(
+                                      attpercen.toString(),
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    positionFactor: 0.5,
+                                    angle: 90,
+                                  )
+                                ],
+                              )
+                            ],
+                          )
+                          );
+                      },
+                      
+                    ),
                   ),
                 ],
               ),
@@ -179,6 +189,7 @@ class SubDetails extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: ElevatedButton(
                         onPressed: () {
+                         
                           addingAbsence(id);
                           calculateAttPercentage(id);
                           markAbsence(context);

@@ -1,26 +1,26 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:attendence_marker2/db/db_functions/db_form_functions.dart';
+import 'package:attendence_marker2/db/db_models/form_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:hive_flutter/adapters.dart';
 
 class DatePicker extends StatefulWidget {
-   DatePicker({Key? key}) : super(key: key);
+  DatePicker({Key? key}) : super(key: key);
 
-   
- 
+  
+
   @override
   State<DatePicker> createState() => _DatePickerState();
 }
 
+
 class _DatePickerState extends State<DatePicker> {
   DateTime selectedDate = DateTime.now();
 
-  
-
   Future<void> _selectDate(BuildContext context) async {
-   
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
@@ -30,14 +30,21 @@ class _DatePickerState extends State<DatePicker> {
       setState(() {
         selectedDate = picked;
       });
+      print(selectedDate);
+
+      String currentDate=selectedDate.toString();
+      
+      
   }
+ 
+    
 
   @override
   Widget build(BuildContext context) {
     // getAllSublist();
     return Container(
       child: Column(
-       // mainAxisSize: MainAxisSize.min,
+        // mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           // Text("${selectedDate.toLocal()}".split(' ')[0]),
           SizedBox(
@@ -50,26 +57,28 @@ class _DatePickerState extends State<DatePicker> {
                 children: [
                   ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(Colors.green),
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.green),
                       ),
                       onPressed: () => _selectDate(context),
                       child: Text('Select date')),
-                      SizedBox(height: 10,),
-                      Text("${selectedDate.toLocal()}".split(' ')[0],style: TextStyle(color: Colors.green,fontSize:18)),
-                     
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text("${selectedDate.toLocal()}".split(' ')[0],
+                      style: TextStyle(color: Colors.green, fontSize: 18)),
                   
-
-
-
                 ],
               ),
             ),
-          )
-          ,
-          
+          ),
         ],
       ),
     );
+
     
   }
+
 }
+
+
